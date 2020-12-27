@@ -1,4 +1,4 @@
-package com.example.day_project_1.adapter;
+package com.example.shoppdemo.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -14,8 +14,8 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.layout.ColumnLayoutHelper;
 import com.bumptech.glide.Glide;
-import com.example.day_project_1.R;
-import com.example.day_project_1.data.ItemBean;
+import com.example.shoppdemo.R;
+import com.example.shoppdemo.bean.HomeBannerBean;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
@@ -24,9 +24,9 @@ import java.util.ArrayList;
 public class LanGeAdapter extends DelegateAdapter.Adapter {
 
     private ColumnLayoutHelper columnLayoutHelper;
-    private ArrayList<ItemBean.DataDTO.BannerDTO> banner;
+    private ArrayList<HomeBannerBean.DataDTO.BannerDTO> banner;
 
-    public LanGeAdapter(ColumnLayoutHelper columnLayoutHelper, ArrayList<ItemBean.DataDTO.BannerDTO> banner) {
+    public LanGeAdapter(ColumnLayoutHelper columnLayoutHelper, ArrayList<HomeBannerBean.DataDTO.BannerDTO> banner) {
         this.columnLayoutHelper = columnLayoutHelper;
         this.banner = banner;
     }
@@ -39,7 +39,7 @@ public class LanGeAdapter extends DelegateAdapter.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_banner, null, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_banner, parent, false);
         return new BannerViewHolder(view);
     }
 
@@ -53,9 +53,8 @@ public class LanGeAdapter extends DelegateAdapter.Adapter {
                 .setImageLoader(new ImageLoader() {
                     @Override
                     public void displayImage(Context context, Object path, ImageView imageView) {
-                        ItemBean.DataDTO.BannerDTO bannerDTO = (ItemBean.DataDTO.BannerDTO) path;
-                        Glide.with(context).load(bannerDTO.getImage_url())
-                                .into(imageView);
+                        HomeBannerBean.DataDTO.BannerDTO bannerDTO = (HomeBannerBean.DataDTO.BannerDTO) path;
+                        Glide.with(context).load(bannerDTO.getImage_url()).into(imageView);
                     }
                 }).start();
     }
